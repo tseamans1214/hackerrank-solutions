@@ -79,7 +79,28 @@ class BTree {
     }
     console.log(this.value);
   }
+
+  treeHeight() {
+       if (this === null) {
+              return -1;
+          } else {
+              const leftHeight = this.left.treeHeight();
+              const rightHeight = this.right.treeHeight();
+              return Math.max(leftHeight, rightHeight) + 1;
+          }
+  }
 }
+
+function getTreeHeight(root) {
+  if (root === null) {
+              return -1;
+          } else {
+              const leftHeight = getTreeHeight(root.left);
+              const rightHeight = getTreeHeight(root.right);
+              return Math.max(leftHeight, rightHeight) + 1;
+          }
+}
+
 
 let bTree = new BTree(5);
 bTree.insert(3);
@@ -98,3 +119,8 @@ console.log("preOrderPrint:");
 bTree.preOrderPrint();
 console.log("postOrderPrint:");
 bTree.postOrderPrint();
+console.log("Tree Height:");
+console.log(getTreeHeight(bTree));
+bTree.insert(11);
+console.log("Tree Height:");
+console.log(getTreeHeight(bTree));
